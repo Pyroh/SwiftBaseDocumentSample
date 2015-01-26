@@ -2,8 +2,10 @@
 //  AppDelegate.swift
 //  SwiftBaseDocumentSample
 //
-//  Created by C3PO on 25/01/2015.
-//  Copyright (c) 2015 Sebastien REMY. All rights reserved.
+//  This sample code was create by CocoaCafe Forum communauty in MIT Licence
+//
+//  Refered topic :
+//  http://forum.cocoacafe.fr/topic/13410-disparition-de-fileowners-de-xib-à-storyboard/
 //
 
 import Cocoa
