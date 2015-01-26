@@ -8,14 +8,18 @@
 //  http://forum.cocoacafe.fr/topic/13410-disparition-de-fileowners-de-xib-à-storyboard/
 //
 
+
 import Cocoa
+
+let MYTEXT_KEY  = "Text"
+let MYCHECK_KEY = "Check"
 
 class Document: NSDocument {
 
-    var myText:String = ""
+    var myText:String   = ""
+    var myState:Int    = 0
     
     override init() {
-        
         // Subclass-specific initialization here.
         super.init()
         println("init \(myText)")
@@ -42,39 +46,50 @@ class Document: NSDocument {
 
     }
     
-     func description() -> String {
-        return self.myText
+     func simpleDescription() -> String {
+        return "Description (Important : \(self.myState)) Text : \(self.myText)"
     }
 
     // MARK: Read / Write file
     
     override func dataOfType(typeName: String, error outError: NSErrorPointer) -> NSData? {
  
-        // Return data to save
+        // Print data to save
         println("SAVE  :")
         println("----------")
-        println("\(myText)")
+        println("(\(myState)) \(myText)")
         println()
         
-        return self.myText.dataUsingEncoding ( NSUTF8StringEncoding , allowLossyConversion : false )
+        // Json serialization
+        let savedDict = [MYCHECK_KEY: self.myState, MYTEXT_KEY: self.myText]
+        var error: NSError? = nil
+        let serializedData = NSJSONSerialization.dataWithJSONObject(savedDict, options: NSJSONWritingOptions(), error: &error)
+        
+        
+        return serializedData
     }
 
-    override func readFromData(data: NSData, ofType typeName: String, error outError: NSErrorPointer) -> Bool {
+    override func readFromData(data: NSData, ofType typeName: String?, error outError: NSErrorPointer) -> Bool {
         
         // Read file
         
-        if data.length > 0 {
-            // Load data
-            let aString = NSString (data: data, encoding: NSUTF8StringEncoding)
-            self.myText = aString as String
-        } else {
-            // Empty file
-            self.myText = ""
+        // Load data
+        
+        var error: NSError? = nil
+        
+        let loadedDict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(), error: &error) as? NSDictionary
+        
+        if let check = loadedDict![MYCHECK_KEY] as? Int {
+            self.myState = check
+        }
+        
+        if let text = loadedDict![MYTEXT_KEY] as? String {
+            self.myText = text
         }
         
         println("LOAD  :")
         println("----------")
-        println("\(myText)")
+        println("(\(myState)) \(myText)")
         println()
         
         return true

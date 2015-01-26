@@ -13,7 +13,6 @@
 		DB4AB6941A7502120014B996 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DB4AB6931A7502120014B996 /* Images.xcassets */; };
 		DB4AB6971A7502120014B996 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB4AB6951A7502120014B996 /* Main.storyboard */; };
 		DB4AB6A31A7502120014B996 /* SwiftBaseDocumentSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4AB6A21A7502120014B996 /* SwiftBaseDocumentSampleTests.swift */; };
-		DB577EDB1A76EE0E007882DB /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = DB577EDA1A76EE0E007882DB /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +36,6 @@
 		DB4AB69C1A7502120014B996 /* SwiftBaseDocumentSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftBaseDocumentSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB4AB6A11A7502120014B996 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DB4AB6A21A7502120014B996 /* SwiftBaseDocumentSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftBaseDocumentSampleTests.swift; sourceTree = "<group>"; };
-		DB577EDA1A76EE0E007882DB /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +80,6 @@
 				DB4AB68D1A7502120014B996 /* AppDelegate.swift */,
 				DB4AB68F1A7502120014B996 /* ViewController.swift */,
 				DB4AB6911A7502120014B996 /* Document.swift */,
-				DB577EDA1A76EE0E007882DB /* README.md */,
 				DB4AB6931A7502120014B996 /* Images.xcassets */,
 				DB4AB6951A7502120014B996 /* Main.storyboard */,
 				DB4AB68B1A7502120014B996 /* Supporting Files */,
@@ -216,7 +213,6 @@
 			files = (
 				DB4AB6901A7502120014B996 /* ViewController.swift in Sources */,
 				DB4AB68E1A7502120014B996 /* AppDelegate.swift in Sources */,
-				DB577EDB1A76EE0E007882DB /* README.md in Sources */,
 				DB4AB6921A7502120014B996 /* Document.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

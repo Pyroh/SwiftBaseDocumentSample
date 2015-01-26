@@ -13,8 +13,11 @@ import Cocoa
 class ViewController: NSViewController, NSTextDelegate {
     
     // MARK: Interface
-    @IBOutlet var myTextView: NSTextView!
-    
+    @IBOutlet var myTextView:   NSTextView!
+    @IBOutlet weak var myButtonCell: NSButtonCell!
+
+
+
     // MARK: ViewController func
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,17 +33,30 @@ class ViewController: NSViewController, NSTextDelegate {
             
             if let doc = representedObject as? Document {
                 self.myTextView.string = doc.myText
+                self.myButtonCell.state = doc.myState
             }
         }
     }
     
-    // MARK: Delegates
+    // MARK: Change value in document
     func  textDidChange(notification: NSNotification) {
         // Change var in Document
         println("textDidChange") // Update Document
         if let doc = representedObject as? Document {
             doc.myText = self.myTextView.string!
         }
+    }
+
+
+    @IBAction func changeCheckState(sender: AnyObject) {
+        // Change var in Document
+        println("changeCheckState")
+        if let doc = representedObject as? Document {
+            let state = self.myButtonCell.state
+
+            doc.myState = self.myButtonCell.state
+        }
+
     }
 }
 
