@@ -46,8 +46,8 @@ class Document: NSDocument {
 
     }
     
-     func simpleDescription() -> String {
-        return "Description (Important : \(self.myState)) Text : \(self.myText)"
+     func description() -> String {
+        return "\nDescription\nImportant : \(self.myState)\nText : \(self.myText)"
     }
 
     // MARK: Read / Write file
