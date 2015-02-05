@@ -437,7 +437,7 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" spellingCorrection="YES" smartInsertDelete="YES" id="ce0-ZS-i3t">
-                                            <rect key="frame" x="0.0" y="0.0" width="223" height="218"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="223" height="219"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <size key="minSize" width="451" height="219"/>
@@ -446,9 +446,9 @@
                                             <size key="minSize" width="451" height="219"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                             <connections>
-                                                <binding destination="5gI-5U-AMq" name="attributedString" keyPath="self.aText" id="PQN-r1-afP">
+                                                <binding destination="5gI-5U-AMq" name="attributedString" keyPath="self.representedObject.myText" id="iRI-PG-Drm">
                                                     <dictionary key="options">
-                                                        <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                        <string key="NSNullPlaceholder">Type text here.</string>
                                                     </dictionary>
                                                 </binding>
                                             </connections>
@@ -474,10 +474,10 @@
                                 <buttonCell key="cell" type="check" title="Very important doc" bezelStyle="regularSquare" imagePosition="left" inset="2" id="fnT-km-AXg">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
-                                    <connections>
-                                        <binding destination="5gI-5U-AMq" name="value" keyPath="self.aCheck" id="yMN-rn-VAb"/>
-                                    </connections>
                                 </buttonCell>
+                                <connections>
+                                    <binding destination="5gI-5U-AMq" name="value" keyPath="self.representedObject.myState" id="IN4-mp-ruA"/>
+                                </connections>
                             </button>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IKu-Sy-UII">
                                 <rect key="frame" x="377" y="249" width="96" height="22"/>
@@ -489,14 +489,15 @@
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                    <connections>
-                                        <binding destination="5gI-5U-AMq" name="value" keyPath="self.anAuthor" id="EmO-nc-7f3">
-                                            <dictionary key="options">
-                                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                            </dictionary>
-                                        </binding>
-                                    </connections>
                                 </textFieldCell>
+                                <connections>
+                                    <binding destination="5gI-5U-AMq" name="value" keyPath="self.representedObject.myAuthor" id="J8s-IT-edw">
+                                        <dictionary key="options">
+                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                            <string key="NSNullPlaceholder">Author's name</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DLU-oB-w4S">
                                 <rect key="frame" x="318" y="254" width="53" height="17"/>
@@ -525,7 +526,7 @@
                 </viewController>
                 <customObject id="2Tp-Fl-jBw" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="132.5" y="945.5"/>
+            <point key="canvasLocation" x="75.5" y="740.5"/>
         </scene>
     </scenes>
 </document>

@@ -17,21 +17,24 @@ let MYAUTHOR_KEY = "Author"
 
 class Document: NSDocument {
 
-    var myState:Bool = false
-    
-    var myAuthor:String? = "" {
+    dynamic var myState: Bool = false {
         didSet {
-            if myAuthor == nil {
-               myAuthor = ""
-            }
+            self.undoManager?.prepareWithInvocationTarget(self).setValue(oldValue, forKey: "myState")
+            println("myState: \(myState)")
+        }
+    }
+    
+    dynamic var myAuthor: String? {
+        didSet {
+            self.undoManager?.prepareWithInvocationTarget(self).setValue(oldValue, forKey: "myAuthor")
+            println("myAuthor: \(myAuthor)")
         }
     }
 
-    var myText:String? = ""  {
+    dynamic var myText: String? {
         didSet {
-            if myText == nil {
-                myText = ""
-            }
+            self.undoManager?.prepareWithInvocationTarget(self).setValue(oldValue, forKey: "myText")
+           println("myText: \(myText)")
         }
     }
 
@@ -82,7 +85,13 @@ class Document: NSDocument {
         println()
         
         // Json serialization
-        let savedDict = [MYCHECK_KEY: self.myState, MYAUTHOR_KEY: self.myAuthor!, MYTEXT_KEY: self.myText!]
+        var savedDict: [String: AnyObject] = [MYCHECK_KEY: self.myState]
+        if let text = myText {
+            savedDict[MYTEXT_KEY] = text
+        }
+        if let author = myAuthor {
+            savedDict[MYAUTHOR_KEY] = author
+        }
         var error: NSError? = nil
         let serializedData = NSJSONSerialization.dataWithJSONObject(savedDict, options: NSJSONWritingOptions(), error: &error)
         
@@ -96,25 +105,21 @@ class Document: NSDocument {
         
         var error: NSError? = nil
         
-        let loadedDict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(), error: &error) as? NSDictionary
-        
-        if let check = loadedDict![MYCHECK_KEY] as? Bool {
-            self.myState = check
+        if let loadedDict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(), error: &error) as? [String: AnyObject] {
+            if let check = loadedDict[MYCHECK_KEY] as? Bool {
+                self.myState = check
+            }
+            self.myAuthor = loadedDict[MYAUTHOR_KEY] as? String
+            self.myText = loadedDict[MYTEXT_KEY] as? String
+            
+            println("LOAD  :")
+            println("----------")
+            println("(\(myState)) \(myAuthor) \(myText)")
+            
+            return true
+        } else {
+            return false
         }
-        
-        if let author = loadedDict![MYAUTHOR_KEY] as? String {
-            self.myAuthor = author
-        }
-        
-        if let text = loadedDict![MYTEXT_KEY] as? NSString {
-            self.myText = text
-        }
-        
-        println("LOAD  :")
-        println("----------")
-        println("(\(myState)) \(myAuthor) \(myText)")
-        
-        return true
     }
 }
 

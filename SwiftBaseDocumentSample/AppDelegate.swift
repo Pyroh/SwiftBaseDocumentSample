@@ -16,8 +16,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
-        println("Create with Cocoacafe.fr communauty !")
-        println("----------------------------------------")
+        println("Created with Cocoacafe.fr communauty !")
+        println("--------------------------------------")
         println()
     }
 
