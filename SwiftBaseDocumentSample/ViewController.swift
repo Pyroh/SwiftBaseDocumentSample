@@ -10,15 +10,53 @@
 
 import Cocoa
 
-class ViewController: NSViewController, NSTextDelegate {
-    
-    // MARK: Interface
-    @IBOutlet var myTextView:   NSTextView!
-    @IBOutlet weak var myButtonCell: NSButtonCell!
+let ACHECK_KEY   = "aCheck"
+let ANAUTHOR_KEY = "anAuthor"
+let ATEXT_KEY    = "aText"
 
+
+class ViewController: NSViewController {
+
+
+    
+ 
+
+    // MARK: Controllers Variables
+    var aCheck : Bool = false {
+        didSet {
+            println("didSet aCheck : \(self.aCheck)")
+            if let doc = representedObject as? Document {
+                doc.myState = self.aCheck
+            }
+        }
+    }
+    
+    var anAuthor : String? = "" {
+        didSet {
+            println("didSet anAuthor : \(self.anAuthor)")
+            if let doc = representedObject as? Document {
+                doc.myAuthor = self.anAuthor
+            }
+        }
+    }
+    
+    var aText : NSAttributedString? = nil {
+        didSet {
+           println("didSet aText : \(self.self.aText?.string)")
+            if let doc = representedObject as? Document {
+                doc.myText = self.aText?.string
+            }
+        }
+    }
+
+
+
+    
 
 
     // MARK: ViewController func
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -32,31 +70,26 @@ class ViewController: NSViewController, NSTextDelegate {
             println ()
             
             if let doc = representedObject as? Document {
-                self.myTextView.string = doc.myText
-                self.myButtonCell.state = doc.myState
+                // KVO : Will Change notifications
+                self.willChangeValueForKey(ACHECK_KEY)
+                self.willChangeValueForKey(ANAUTHOR_KEY)
+                self.willChangeValueForKey(ATEXT_KEY)
+                
+                self.aCheck     = doc.myState
+                self.anAuthor   = doc.myAuthor!
+                self.aText      = NSAttributedString (string:doc.myText!)
+                
+                // KVO : Did Change notifications
+                self.didChangeValueForKey(ACHECK_KEY)
+                self.didChangeValueForKey(ANAUTHOR_KEY)
+                self.didChangeValueForKey(ATEXT_KEY)
+                
+                println("Document loaded :")
+                println("------------------")
+                println("\(self.aCheck) -  \(self.anAuthor) - \(self.aText)")
+                
             }
         }
-    }
-    
-    // MARK: Change value in document
-    func  textDidChange(notification: NSNotification) {
-        // Change var in Document
-        println("textDidChange") // Update Document
-        if let doc = representedObject as? Document {
-            doc.myText = self.myTextView.string!
-        }
-    }
-
-
-    @IBAction func changeCheckState(sender: AnyObject) {
-        // Change var in Document
-        println("changeCheckState")
-        if let doc = representedObject as? Document {
-            let state = self.myButtonCell.state
-
-            doc.myState = self.myButtonCell.state
-        }
-
     }
 }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
@@ -427,11 +427,11 @@
             <objects>
                 <viewController id="5gI-5U-AMq" customClass="ViewController" customModule="SwiftBaseDocumentSample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="ERx-hH-rdd">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="240"/>
+                        <rect key="frame" x="0.0" y="0.0" width="493" height="291"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tra-xL-DxS">
-                                <rect key="frame" x="20" y="20" width="440" height="178"/>
+                                <rect key="frame" x="20" y="20" width="453" height="221"/>
                                 <clipView key="contentView" id="gPr-cL-f6G">
                                     <rect key="frame" x="1" y="1" width="223" height="133"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -440,13 +440,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="223" height="218"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <size key="minSize" width="438" height="176"/>
+                                            <size key="minSize" width="451" height="219"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="438" height="176"/>
+                                            <size key="minSize" width="451" height="219"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                             <connections>
-                                                <outlet property="delegate" destination="5gI-5U-AMq" id="AmB-yd-OVn"/>
+                                                <binding destination="5gI-5U-AMq" name="attributedString" keyPath="self.aText" id="PQN-r1-afP">
+                                                    <dictionary key="options">
+                                                        <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                    </dictionary>
+                                                </binding>
                                             </connections>
                                         </textView>
                                     </subviews>
@@ -462,33 +466,66 @@
                                 </scroller>
                             </scrollView>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="REj-ih-n9m">
-                                <rect key="frame" x="18" y="204" width="139" height="18"/>
+                                <rect key="frame" x="18" y="247" width="139" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="22" id="8t3-vk-92H"/>
+                                    <constraint firstAttribute="width" constant="135" id="dGy-Fo-ik0"/>
+                                </constraints>
                                 <buttonCell key="cell" type="check" title="Very important doc" bezelStyle="regularSquare" imagePosition="left" inset="2" id="fnT-km-AXg">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                     <connections>
-                                        <action selector="changeCheckState:" target="5gI-5U-AMq" id="lFJ-7z-6mP"/>
+                                        <binding destination="5gI-5U-AMq" name="value" keyPath="self.aCheck" id="yMN-rn-VAb"/>
                                     </connections>
                                 </buttonCell>
                             </button>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IKu-Sy-UII">
+                                <rect key="frame" x="377" y="249" width="96" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="96" id="4XV-OF-Egr"/>
+                                    <constraint firstAttribute="height" constant="22" id="QJt-54-ZfE"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Xst-qW-QLZ">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <connections>
+                                        <binding destination="5gI-5U-AMq" name="value" keyPath="self.anAuthor" id="EmO-nc-7f3">
+                                            <dictionary key="options">
+                                                <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                            </dictionary>
+                                        </binding>
+                                    </connections>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DLU-oB-w4S">
+                                <rect key="frame" x="318" y="254" width="53" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Author :" id="siu-uk-EHS">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="tra-xL-DxS" secondAttribute="trailing" constant="20" id="7Uq-vi-E5O"/>
-                            <constraint firstItem="tra-xL-DxS" firstAttribute="top" secondItem="REj-ih-n9m" secondAttribute="bottom" constant="8" id="8rZ-jp-XJO"/>
-                            <constraint firstItem="REj-ih-n9m" firstAttribute="top" secondItem="ERx-hH-rdd" secondAttribute="top" constant="20" id="BKl-0n-ajJ"/>
-                            <constraint firstAttribute="bottom" secondItem="tra-xL-DxS" secondAttribute="bottom" constant="20" id="Jn0-xq-uJ6"/>
-                            <constraint firstItem="REj-ih-n9m" firstAttribute="leading" secondItem="ERx-hH-rdd" secondAttribute="leading" constant="20" id="cXz-2s-fhf"/>
-                            <constraint firstItem="tra-xL-DxS" firstAttribute="leading" secondItem="ERx-hH-rdd" secondAttribute="leading" constant="20" id="tXY-cM-hw8"/>
+                            <constraint firstItem="IKu-Sy-UII" firstAttribute="leading" secondItem="DLU-oB-w4S" secondAttribute="trailing" constant="8" id="Hcj-ij-Ay7"/>
+                            <constraint firstItem="tra-xL-DxS" firstAttribute="top" secondItem="REj-ih-n9m" secondAttribute="bottom" constant="8" symbolic="YES" id="Lgj-QT-lsM"/>
+                            <constraint firstItem="REj-ih-n9m" firstAttribute="leading" secondItem="ERx-hH-rdd" secondAttribute="leading" constant="20" id="R0e-i9-hBW"/>
+                            <constraint firstItem="IKu-Sy-UII" firstAttribute="baseline" secondItem="DLU-oB-w4S" secondAttribute="baseline" constant="3" id="S7u-uW-zhF"/>
+                            <constraint firstAttribute="trailing" secondItem="tra-xL-DxS" secondAttribute="trailing" constant="20" symbolic="YES" id="TZY-6w-DmZ"/>
+                            <constraint firstItem="tra-xL-DxS" firstAttribute="leading" secondItem="REj-ih-n9m" secondAttribute="leading" id="UQ7-or-bi4"/>
+                            <constraint firstItem="REj-ih-n9m" firstAttribute="top" secondItem="ERx-hH-rdd" secondAttribute="top" constant="20" id="URD-i3-QxR"/>
+                            <constraint firstItem="IKu-Sy-UII" firstAttribute="top" secondItem="ERx-hH-rdd" secondAttribute="top" constant="20" id="VUv-K0-LxV"/>
+                            <constraint firstItem="tra-xL-DxS" firstAttribute="leading" secondItem="ERx-hH-rdd" secondAttribute="leading" constant="20" symbolic="YES" id="bjg-vG-K0n"/>
+                            <constraint firstAttribute="bottom" secondItem="tra-xL-DxS" secondAttribute="bottom" constant="20" symbolic="YES" id="dwg-Uy-DuX"/>
+                            <constraint firstAttribute="trailing" secondItem="IKu-Sy-UII" secondAttribute="trailing" constant="20" id="u2N-zP-ws8"/>
+                            <constraint firstItem="tra-xL-DxS" firstAttribute="top" secondItem="ERx-hH-rdd" secondAttribute="top" constant="50" id="xaW-Ie-YeX"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="myButtonCell" destination="fnT-km-AXg" id="cLn-UN-7a0"/>
-                        <outlet property="myTextView" destination="ce0-ZS-i3t" id="nKI-gT-8vX"/>
-                    </connections>
                 </viewController>
                 <customObject id="2Tp-Fl-jBw" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="20" y="903"/>
+            <point key="canvasLocation" x="132.5" y="945.5"/>
         </scene>
     </scenes>
 </document>

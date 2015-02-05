@@ -13,16 +13,35 @@ import Cocoa
 
 let MYTEXT_KEY  = "Text"
 let MYCHECK_KEY = "Check"
+let MYAUTHOR_KEY = "Author"
 
 class Document: NSDocument {
 
-    var myText:String   = ""
-    var myState:Int    = 0
+    var myState:Bool = false
+    
+    var myAuthor:String? = "" {
+        didSet {
+            if myAuthor == nil {
+               myAuthor = ""
+            }
+        }
+    }
+
+    var myText:String? = ""  {
+        didSet {
+            if myText == nil {
+                myText = ""
+            }
+        }
+    }
+
     
     override init() {
         // Subclass-specific initialization here.
         super.init()
-        println("init \(myText)")
+        println("DOC INIT  :")
+        println("----------")
+        println("(\(myState)) \(myAuthor) \(myText)")
     }
 
     override func windowControllerDidLoadNib(aController: NSWindowController) {
@@ -43,11 +62,13 @@ class Document: NSDocument {
         // Connect viewController representedObject to document (self).
         let vc = windowController.contentViewController as ViewController
         vc.representedObject = self
+        
+        
 
     }
     
      func description() -> String {
-        return "\nDescription\nImportant : \(self.myState)\nText : \(self.myText)"
+        return "\nDescription\nImportant : \(self.myState)\nAuthor\(myAuthor)\nText : \(self.myText)"
     }
 
     // MARK: Read / Write file
@@ -57,11 +78,11 @@ class Document: NSDocument {
         // Print data to save
         println("SAVE  :")
         println("----------")
-        println("(\(myState)) \(myText)")
+        println("(\(myState)) \(myAuthor) \(myText)")
         println()
         
         // Json serialization
-        let savedDict = [MYCHECK_KEY: self.myState, MYTEXT_KEY: self.myText]
+        let savedDict = [MYCHECK_KEY: self.myState, MYAUTHOR_KEY: self.myAuthor!, MYTEXT_KEY: self.myText!]
         var error: NSError? = nil
         let serializedData = NSJSONSerialization.dataWithJSONObject(savedDict, options: NSJSONWritingOptions(), error: &error)
         
@@ -71,26 +92,27 @@ class Document: NSDocument {
 
     override func readFromData(data: NSData, ofType typeName: String?, error outError: NSErrorPointer) -> Bool {
         
-        // Read file
-        
         // Load data
         
         var error: NSError? = nil
         
         let loadedDict = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(), error: &error) as? NSDictionary
         
-        if let check = loadedDict![MYCHECK_KEY] as? Int {
+        if let check = loadedDict![MYCHECK_KEY] as? Bool {
             self.myState = check
         }
         
-        if let text = loadedDict![MYTEXT_KEY] as? String {
+        if let author = loadedDict![MYAUTHOR_KEY] as? String {
+            self.myAuthor = author
+        }
+        
+        if let text = loadedDict![MYTEXT_KEY] as? NSString {
             self.myText = text
         }
         
         println("LOAD  :")
         println("----------")
-        println("(\(myState)) \(myText)")
-        println()
+        println("(\(myState)) \(myAuthor) \(myText)")
         
         return true
     }
