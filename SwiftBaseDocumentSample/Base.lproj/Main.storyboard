@@ -446,11 +446,7 @@
                                             <size key="minSize" width="451" height="219"/>
                                             <size key="maxSize" width="463" height="10000000"/>
                                             <connections>
-                                                <binding destination="5gI-5U-AMq" name="attributedString" keyPath="self.representedObject.myText" id="iRI-PG-Drm">
-                                                    <dictionary key="options">
-                                                        <string key="NSNullPlaceholder">Type text here.</string>
-                                                    </dictionary>
-                                                </binding>
+                                                <outlet property="delegate" destination="lOq-Ad-Nzf" id="qH6-mz-CX8"/>
                                             </connections>
                                         </textView>
                                     </subviews>
@@ -465,6 +461,34 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IKu-Sy-UII">
+                                <rect key="frame" x="377" y="249" width="96" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="96" id="4XV-OF-Egr"/>
+                                    <constraint firstAttribute="height" constant="22" id="QJt-54-ZfE"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" continuous="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Xst-qW-QLZ">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="lOq-Ad-Nzf" name="value" keyPath="selection.myAuthor" id="ecw-mg-Bwj">
+                                        <dictionary key="options">
+                                            <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                            <string key="NSNullPlaceholder">Author's name</string>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DLU-oB-w4S">
+                                <rect key="frame" x="322" y="251" width="49" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Author:" id="siu-uk-EHS">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="REj-ih-n9m">
                                 <rect key="frame" x="18" y="247" width="139" height="26"/>
                                 <constraints>
@@ -476,43 +500,15 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <binding destination="5gI-5U-AMq" name="value" keyPath="self.representedObject.myState" id="IN4-mp-ruA"/>
+                                    <binding destination="lOq-Ad-Nzf" name="value" keyPath="selection.myState" id="fpg-yz-TFO"/>
                                 </connections>
                             </button>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IKu-Sy-UII">
-                                <rect key="frame" x="377" y="249" width="96" height="22"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="96" id="4XV-OF-Egr"/>
-                                    <constraint firstAttribute="height" constant="22" id="QJt-54-ZfE"/>
-                                </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Xst-qW-QLZ">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <connections>
-                                    <binding destination="5gI-5U-AMq" name="value" keyPath="self.representedObject.myAuthor" id="J8s-IT-edw">
-                                        <dictionary key="options">
-                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                            <string key="NSNullPlaceholder">Author's name</string>
-                                        </dictionary>
-                                    </binding>
-                                </connections>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DLU-oB-w4S">
-                                <rect key="frame" x="318" y="254" width="53" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Author :" id="siu-uk-EHS">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="IKu-Sy-UII" firstAttribute="leading" secondItem="DLU-oB-w4S" secondAttribute="trailing" constant="8" id="Hcj-ij-Ay7"/>
                             <constraint firstItem="tra-xL-DxS" firstAttribute="top" secondItem="REj-ih-n9m" secondAttribute="bottom" constant="8" symbolic="YES" id="Lgj-QT-lsM"/>
                             <constraint firstItem="REj-ih-n9m" firstAttribute="leading" secondItem="ERx-hH-rdd" secondAttribute="leading" constant="20" id="R0e-i9-hBW"/>
-                            <constraint firstItem="IKu-Sy-UII" firstAttribute="baseline" secondItem="DLU-oB-w4S" secondAttribute="baseline" constant="3" id="S7u-uW-zhF"/>
+                            <constraint firstItem="IKu-Sy-UII" firstAttribute="baseline" secondItem="DLU-oB-w4S" secondAttribute="baseline" id="S7u-uW-zhF"/>
                             <constraint firstAttribute="trailing" secondItem="tra-xL-DxS" secondAttribute="trailing" constant="20" symbolic="YES" id="TZY-6w-DmZ"/>
                             <constraint firstItem="tra-xL-DxS" firstAttribute="leading" secondItem="REj-ih-n9m" secondAttribute="leading" id="UQ7-or-bi4"/>
                             <constraint firstItem="REj-ih-n9m" firstAttribute="top" secondItem="ERx-hH-rdd" secondAttribute="top" constant="20" id="URD-i3-QxR"/>
@@ -523,8 +519,16 @@
                             <constraint firstItem="tra-xL-DxS" firstAttribute="top" secondItem="ERx-hH-rdd" secondAttribute="top" constant="50" id="xaW-Ie-YeX"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="textView" destination="ce0-ZS-i3t" id="Vnt-hu-y6D"/>
+                    </connections>
                 </viewController>
                 <customObject id="2Tp-Fl-jBw" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <objectController objectClassName="Document" id="lOq-Ad-Nzf" userLabel="Document">
+                    <connections>
+                        <binding destination="5gI-5U-AMq" name="contentObject" keyPath="self.representedObject" id="L6O-Om-NLr"/>
+                    </connections>
+                </objectController>
             </objects>
             <point key="canvasLocation" x="75.5" y="740.5"/>
         </scene>

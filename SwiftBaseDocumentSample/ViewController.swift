@@ -16,26 +16,19 @@ let ATEXT_KEY    = "aText"
 
 
 class ViewController: NSViewController {
+    @IBOutlet var textView: NSTextView!
 
-    // MARK: ViewController func
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
-    override var representedObject: AnyObject? {
+    // Even if super's representedObject is dynamic you must make this one dynamic to.
+    override dynamic var representedObject: AnyObject? {
         didSet {
             // Update the view, if already loaded.
             println("Document :")
             println("-----------")
-            println("\(representedObject)")
-            println ()
-            
+            println("\(representedObject)\n")
             if let doc = representedObject as? Document {
                 println("Document loaded :")
                 println("------------------")
-                println("\(doc.myState) -  \(doc.myAuthor) - \(doc.myText)")
-                
+                println("\(doc.myState) - \(doc.myAuthor) - ")
             }
         }
     }
